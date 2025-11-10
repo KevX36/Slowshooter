@@ -139,7 +139,134 @@ namespace Slowshooter
             p2_y_pos = p2_y_pos.Clamp(p2_min_max_y.Item1, p2_min_max_y.Item2);
 
             turn += 1;
+            if (P1Trap1X != 0)
+            {
+                if (P1Trap1State == '3')
+                {
+                    P1Trap1State = '2';
+                }
+                if (P1Trap1State == '2')
+                {
+                    P1Trap1State = '1';
+                }
+                if (P1Trap1State == '1')
+                {
+                    P1Trap1State = '^';
+                }
 
+            }
+            if (P1Trap2X != 0)
+            {
+                if (P1Trap2State == '3')
+                {
+                    P1Trap2State = '2';
+                }
+                if (P1Trap2State == '2')
+                {
+                    P1Trap2State = '1';
+                }
+                if (P1Trap2State == '1')
+                {
+                    P1Trap2State = '^';
+                }
+
+            }
+            if (P1Trap3X != 0)
+            {
+                if (P1Trap3State == '3')
+                {
+                    P1Trap3State = '2';
+                }
+                if (P1Trap3State == '2')
+                {
+                    P1Trap3State = '1';
+                }
+                if (P1Trap3State == '1')
+                {
+                    P1Trap3State = '^';
+                }
+
+            }
+            if (P1Trap4X != 0)
+            {
+                if (P1Trap4State == '3')
+                {
+                    P1Trap4State = '2';
+                }
+                if (P1Trap4State == '2')
+                {
+                    P1Trap4State = '1';
+                }
+                if (P1Trap4State == '1')
+                {
+                    P1Trap4State = '^';
+                }
+
+            }
+            if (P2Trap1X != 0)
+            {
+                if (P2Trap1State == '3')
+                {
+                    P2Trap1State = '2';
+                }
+                if (P2Trap1State == '2')
+                {
+                    P2Trap1State = '1';
+                }
+                if (P2Trap1State == '1')
+                {
+                    P2Trap1State = '^';
+                }
+
+            }
+            if (P2Trap2X != 0)
+            {
+                if (P2Trap2State == '3')
+                {
+                    P2Trap2State = '2';
+                }
+                if (P2Trap2State == '2')
+                {
+                    P2Trap2State = '1';
+                }
+                if (P2Trap2State == '1')
+                {
+                    P2Trap2State = '^';
+                }
+
+            }
+            if (P2Trap3X != 0)
+            {
+                if (P2Trap3State == '3')
+                {
+                    P2Trap3State = '2';
+                }
+                if (P2Trap3State == '2')
+                {
+                    P2Trap3State = '1';
+                }
+                if (P2Trap3State == '1')
+                {
+                    P2Trap3State = '^';
+                }
+
+            }
+            if (P2Trap4X != 0)
+            {
+                if (P2Trap4State == '3')
+                {
+                    P2Trap4State = '2';
+                }
+                if (P2Trap4State == '2')
+                {
+                    P2Trap4State = '1';
+                }
+                if (P2Trap4State == '1')
+                {
+                    P2Trap4State = '^';
+                }
+
+            }
         }
 
         static void Draw()
