@@ -73,6 +73,12 @@ namespace Slowshooter
         static (char[], char[]) allKeybindings = (new char[]{ 'W', 'A', 'S', 'D' }, new char[]{ 'J', 'I', 'L', 'K' });
         static ConsoleColor[] playerColors = { ConsoleColor.Red, ConsoleColor.Blue };
 
+        // bullet bool and ints
+        static bool bulletActive = false;
+        static int bulletX;
+        static int bulletY;
+        static int bulletDir;
+
         static void Main(string[] args)
         {
             Console.CursorVisible = false;
@@ -81,8 +87,10 @@ namespace Slowshooter
             {
                 ProcessInput();
                 Update();
-                Draw();
-                
+                if (!isPlaying) break; // check if game ended during update so that it doesnt draw even after is playing is set to false
+                    Draw();
+
+
             }
         }
 
@@ -105,7 +113,7 @@ namespace Slowshooter
 
             // get the current player's input
             ConsoleKey input = ConsoleKey.NoName;
-            while (!allowedKeysThisTurn.Contains(((char)input)))
+            while (!allowedKeysThisTurn.Contains(((char)input)) && input != ConsoleKey.Spacebar)
             {
                 input = Console.ReadKey(true).Key;
             }
@@ -121,6 +129,24 @@ namespace Slowshooter
             if (input == ConsoleKey.I) p2_y_input = -1;
             if (input == ConsoleKey.K) p2_y_input = 1;
 
+
+            if (input == ConsoleKey.Spacebar && !bulletActive) //if spacebar is pressed, shoot a bullet
+            {
+                if (turn % 2 == 0)
+                {
+                    bulletX = p1_x_pos;
+                    bulletY = p1_y_pos;
+                    bulletDir = 1;
+                    bulletActive = true;
+                }
+                else
+                {
+                    bulletX = p2_x_pos;
+                    bulletY = p2_y_pos;
+                    bulletDir = -1;
+                    bulletActive = true;
+                }
+            }
         }
 
         static void Update()
@@ -140,10 +166,38 @@ namespace Slowshooter
 
             turn += 1;
 
+            if (bulletActive) //if bullet is active
+            {
+                bulletX += bulletDir;
+
+                if(bulletX == p1_x_pos && bulletY == p1_y_pos && bulletDir == -1) //if bulletX hits p1 position and bulletY hits p1 position and bulletdir == -1
+                {
+                    isPlaying = false; //stop the game
+                    Console.Clear();  //clear the console
+                    Console.WriteLine("Player 1 died. Player 2 obtains victory."); //print victory message
+                    return;
+                }
+
+                if (bulletX == p2_x_pos && bulletY == p2_y_pos && bulletDir == 1)
+                {
+                    isPlaying = false;
+                    Console.Clear();
+                    Console.WriteLine("Player 2 died. Player 1 obtains victory.");
+                    return;
+                }
+
+                if (bulletX < 0 || bulletX > 12) //if bulletX is out of bounds
+                {
+                    bulletActive = false; //deactivate bullet
+                }
+
+            }
+
         }
 
         static void Draw()
         {
+
             // draw the background (playfield)
             Console.SetCursorPosition(0, 0);
             Console.Write(playField);
@@ -157,6 +211,13 @@ namespace Slowshooter
             Console.SetCursorPosition(p2_x_pos, p2_y_pos);
             Console.ForegroundColor = playerColors[1];
             Console.Write("O");
+
+            if (bulletActive) //draw the bullet if active
+            {
+                Console.SetCursorPosition(bulletX, bulletY); //draw bullet at its position
+                Console.ForegroundColor = ConsoleColor.DarkRed; //draw bullet in dark red
+                Console.Write(bulletDir == 1 ? '>' : '<'); //draw bullet character based on direction
+            }
 
             // draw the Turn Indicator
             Console.SetCursorPosition(3, 5);
