@@ -174,7 +174,7 @@ namespace Slowshooter
                 {
                     isPlaying = false; //stop the game
                     Console.Clear();  //clear the console
-                    Console.WriteLine("Player 1 died. Player 2 obtains victory."); //print victory message
+                    Console.WriteLine("Player 1 died. Player 2 is victorious."); //print victory message
                     return;
                 }
 
@@ -182,7 +182,7 @@ namespace Slowshooter
                 {
                     isPlaying = false;
                     Console.Clear();
-                    Console.WriteLine("Player 2 died. Player 1 obtains victory.");
+                    Console.WriteLine("Player 2 died. Player 1 is victorious.");
                     return;
                 }
 
